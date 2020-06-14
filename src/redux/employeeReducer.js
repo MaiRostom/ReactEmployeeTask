@@ -17,10 +17,10 @@ function employeeReducer(state = initialState, action) {
     case POST_DATA:
       console.log("Payload", action.payload);
       console.log("action", action);
-      const { ID, NAME, AGE } = action.payload;
+      const { first_name, age, email,gender } = action.payload;
       let addedState = {
         ...state,
-        employeeList: [...state.employeeList, { ID, NAME, AGE }],
+        employeeList: [...state.employeeList, { first_name, age, email,gender }],
       };
       console.log("new state", addedState);
       return addedState;

@@ -24,9 +24,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+export default function EmployeeList() {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   const listarray = useSelector((state) => {
     console.log("state", state);

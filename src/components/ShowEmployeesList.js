@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { fetchEmployeesAction } from "../redux/employeeAction";
 import { useDispatch, useSelector } from "react-redux";
-import SimpleCard from "./SimpleCard";
+import EmployeesList from "./EmployeesList";
 
-const UsersList = () => {
+const ShowEmployeesList = () => {
   const Dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,9 +18,9 @@ const UsersList = () => {
 
   return (
     <div>
-      <SimpleCard/>
+      <EmployeesList/>
     </div>
   );
 };
 
-export default UsersList;
+export default ShowEmployeesList;

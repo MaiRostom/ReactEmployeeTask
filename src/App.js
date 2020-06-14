@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import EmployeeList from "./components/EmployeeList";
+import ShowEmployeesList from "./components/ShowEmployeesList";
+import AddEmployeeForm from "./components/AddEmployeeForm";
 
 function App() {
   return (
     <div className="App">
-      <EmployeeList/>
+      <ShowEmployeesList/>
+      <AddEmployeeForm/>
+      
       
     </div>
   );
