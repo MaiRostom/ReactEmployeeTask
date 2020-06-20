@@ -1,14 +1,7 @@
-import React, { useEffect } from "react";
-import { fetchEmployeesAction } from "../redux/employeeAction";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import EmployeesList from "./EmployeesList";
-
 const ShowEmployeesList = () => {
-  const Dispatch = useDispatch();
-
-  useEffect(() => {
-    Dispatch(fetchEmployeesAction(2));
-  }, [Dispatch]);
 
   const listarray = useSelector((state) => {
     console.log("state", state);
@@ -19,6 +12,8 @@ const ShowEmployeesList = () => {
   return (
     <div>
       <EmployeesList/>
+      
+     
     </div>
   );
 };

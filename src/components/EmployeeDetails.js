@@ -22,8 +22,7 @@ const EmployeeDetails = () => {
     console.log("EMPDATA", data);
     console.log("TEST");
     setEmpData(data);
-    setTimeout(() => (console.log("EMP", empData), 5000));
-  }, []);
+  }, [listarray]);
 
   return (
     <div>

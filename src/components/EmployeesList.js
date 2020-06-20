@@ -1,12 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -27,11 +25,31 @@ const useStyles = makeStyles({
 export default function EmployeeList() {
   const classes = useStyles();
 
-  const listarray = useSelector((state) => {
+  const empData = useSelector((state) => {
     console.log("state", state);
-    return state.employeeReducer.employeeList;
+    return state.employeeReducer;
   });
-  console.log("list", listarray);
+  console.log("list", empData);
+const dataLoading =(<Typography>The Data is Loading </Typography>);
+const notValid=(<Typography>{empData.error}</Typography>)
+
+  const isValid = empData.employeeList.map((listItem,index) => {
+    //console.log("Index", index);
+    return (
+      <Typography key={index} className={classes.pos} color="textSecondary">
+        <Link to={`/EmployeesList/${listItem.employee_name}`}>
+          {listItem.employee_name}
+        </Link>
+        <br />
+        <label htmlFor="The Salary">Salary: </label>
+        {listItem.employee_salary}
+        <br />
+        <label htmlFor="The Age">Age: </label>
+        {listItem.employee_age}
+         </Typography> 
+
+    );
+  });
 
   return (
     <Card className={classes.root}>
@@ -39,24 +57,10 @@ export default function EmployeeList() {
         <Typography variant="h5" component="h2">
           Employees List
         </Typography>
-        <Typography variant="h5" component="h2">
-          {listarray.map((listItem, index) => {
-            console.log("Index", index);
-            return (
-             
-                <Typography  key={index} className={classes.pos} color="textSecondary">
-                  {listItem.first_name}
-                
-<br/>
-                {listItem.email}
-                </Typography>
-            );
-          })}
-        </Typography>
+         
+        {empData.isLoading ? dataLoading : empData.isLoading===false && empData.error==="" ?isValid : notValid}
+        
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }

@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import { Formik, Field, useField } from "formik";
 import { TextField, Radio, Button } from "@material-ui/core";
 import * as yup from "yup";
 import { addEmployeeaction } from "../redux/employeeAction";
 import { useDispatch } from "react-redux";
+import {Redirect} from "react-router-dom";
 
 const MyTextField = (props) => {
   const [field, meta] = useField(props);
@@ -12,42 +13,51 @@ const MyTextField = (props) => {
 };
 
 const MyvalidationScheme = yup.object({
-  first_name: yup.string().required().min(3),
-  email: yup.string().email(),
-  age: yup.number().moreThan(20),
+  employee_name: yup.string().required().min(3),
+  Email: yup.string().email(),
+  employee_age: yup.number().moreThan(20),
+  Salary:yup.number().integer()
 });
 
 const AddEmployeeForm = () => {
   const Dispatch = useDispatch();
-
+const [isSubmitted,setSubmitted]=useState(false);
   const addEmployee = (data) => {
     console.log("adduser name", data);
     Dispatch(addEmployeeaction(data));
   };
+ 
 
   return (
     <div>
+       
       <Formik
         validateOnChange={true}
         validationSchema={MyvalidationScheme}
-        initialValues={{ first_name: "", age: "", email: "", gender: "male" }}
+        initialValues={{ employee_name: "", employee_age: "", Email: "",employee_salary:"", gender: "male" }}
         onSubmit={(data) => {
           addEmployee(data);
+          setSubmitted(true);
+          console.log("submitt",isSubmitted);
         }}
       >
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="The Name">Name: </label>
-              <MyTextField name="first_name" type="input" />
+              <MyTextField name="employee_name" type="input" />
             </div>
             <div>
               <label htmlFor="The Age">Age: </label>
-              <MyTextField name="age" type="input" />
+              <MyTextField name="employee_age" type="input" />
             </div>
             <div>
               <label htmlFor="The Email">Email: </label>
-              <MyTextField name="email" type="input" />
+              <MyTextField name="Email" type="input" />
+            </div>
+            <div>
+              <label htmlFor="The salary">Salary: </label>
+              <MyTextField name="employee_salary" type="input" />
             </div>
 
             <div>
@@ -60,8 +70,11 @@ const AddEmployeeForm = () => {
 
             <Button type="onSubmit">Submit</Button>
           </form>
+          
         )}
+      
       </Formik>
+      {isSubmitted &&<Redirect to="/" /> }
     </div>
   );
 };
