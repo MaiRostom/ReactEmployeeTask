@@ -16,7 +16,7 @@ const MyvalidationScheme = yup.object({
   employee_name: yup.string().required().min(3),
   Email: yup.string().email(),
   employee_age: yup.number().moreThan(20),
-  Salary:yup.number().integer()
+  employee_salary:yup.number().integer()
 });
 
 const AddEmployeeForm = () => {
